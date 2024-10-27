@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.leARn.controller.ModuloController">
+    <children>
+        <AnchorPane layoutX="24.0" layoutY="21.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="373.0" prefWidth="571.0" styleClass="card" stylesheets="@../css/modulo.css">
+                    <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Editar Módulo">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                        <Button fx:id="editarModulo_editarBtn" layoutX="483.0" layoutY="314.0" mnemonicParsing="false" onAction="#editModulo" styleClass="crearBtn" stylesheets="@../css/modulo.css" text="Editar" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="editarModulo_cancelarBtn" layoutX="390.0" layoutY="314.0" mnemonicParsing="false" styleClass="cancelarBtn" stylesheets="@../css/modulo.css" text="Cancelar">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+      <Label layoutX="87.0" layoutY="80.0" text="Nombre" />
+      <TextField fx:id="editarModulo_nombre" layoutX="87.0" layoutY="97.0" prefHeight="25.0" prefWidth="414.0" />
+      <Label layoutX="87.0" layoutY="130.0" text="Descripción" />
+      <TextField fx:id="editarModulo_descripcion" layoutX="87.0" layoutY="147.0" prefHeight="76.0" prefWidth="414.0" />
+      <Label layoutX="87.0" layoutY="236.0" text="Curso" />
+      <ComboBox fx:id="editarModulo_curso" layoutX="87.0" layoutY="253.0" prefHeight="25.0" prefWidth="414.0" />
+    </children>
+</AnchorPane>

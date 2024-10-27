@@ -1,0 +1,57 @@
+.top-form {
+    -fx-background-color: #00041a;
+    -fx-border-color:#D7DFE1;
+    -fx-border-width: .4px .4px .4px .4px;
+}
+
+.semi-top-form {
+    -fx-background-color: #00041a;
+    -fx-border-color:#440000;
+    -fx-border-width: .4px .4px .4px .4px;
+}
+
+.close {
+    -fx-background-color: #FFFFFF;
+    -fx-cursor: hand;
+}
+
+.close:hover {
+    -fx-background-color: #FF4F6C;
+}
+
+.minimize {
+    -fx-background-color: #FFFFFF;
+    -fx-cursor: hand;
+}
+
+.minimize:hover {
+    -fx-background-color: #DDD;
+}
+
+.nav-form {
+    -fx-background-color: #00041a;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 5,0,0,0);
+}
+
+.logout {
+    -fx-background-color: #DDD;
+    -fx-cursor: hand;
+}
+
+.logout:hover {
+    -fx-background-color: #00041a;
+}
+
+.card {
+    -fx-background-color: #FFFFFF;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5,0,0,0);
+    -fx-background-radius: 3px;
+}
+
+.table-view {
+    -fx-background-radius: 5px;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #FF2021;
+}

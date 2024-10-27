@@ -1,0 +1,23 @@
+.card {
+    -fx-background-color: #FFFFFF;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5,0,0,0);
+    -fx-background-radius: 3px;
+}
+
+.crearBtn {
+    -fx-background-color: #00041a;
+    -fx-cursor: hand;
+}
+
+.crearBtn:hover {
+    -fx-background-color: #DDD;
+}
+
+.cancelarBtn {
+    -fx-background-color: #DDD;
+    -fx-cursor: hand;
+}
+
+.cancelarBtn:hover {
+    -fx-background-color: #00041a;
+}

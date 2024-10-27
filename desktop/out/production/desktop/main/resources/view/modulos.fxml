@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" fx:id="modulos_panel" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" stylesheets="@../css/modulo.css" visible="false" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.leARn.controller.ModuloController">
+    <AnchorPane fx:id="modulos_panel_sec" prefHeight="564.0" prefWidth="900.0" stylesheets="@../css/modulo.css">
+        <children>
+            <AnchorPane fx:id="modulos_filtros" layoutX="34.0" layoutY="25.0" prefHeight="118.0" prefWidth="833.0" styleClass="card" stylesheets="@../css/modulo.css" AnchorPane.bottomAnchor="402.0" AnchorPane.leftAnchor="34.0" AnchorPane.topAnchor="25.0">
+                <children>
+                    <Label layoutX="23.0" layoutY="14.0" text="Filtros">
+                        <font>
+                            <Font name="System Bold" size="16.0" />
+                        </font>
+                    </Label>
+                    <TextField fx:id="modulos_filtroNombre" layoutX="33.0" layoutY="72.0" />
+                    <Label layoutX="33.0" layoutY="51.0" text="Nombre" />
+                </children>
+            </AnchorPane>
+            <AnchorPane fx:id="modulos_tablaVista" layoutX="33.0" layoutY="174.0" prefHeight="371.0" prefWidth="834.0" styleClass="card" stylesheets="@../css/modulo.css" AnchorPane.rightAnchor="33.0">
+                <children>
+                    <TableView fx:id="modulos_tabla" layoutX="21.0" layoutY="49.0" prefHeight="304.0" prefWidth="791.0">
+                        <columns>
+                            <TableColumn fx:id="modulos_tablaCurso" prefWidth="186.0" text="Curso" />
+                            <TableColumn fx:id="modulos_tablaNombre" prefWidth="189.0" text="Nombre" />
+                            <TableColumn fx:id="modulos_tablaDescripcion" minWidth="5.0" prefWidth="279.0" text="Descripción" />
+                        </columns>
+                    </TableView>
+                    <Label layoutX="29.0" layoutY="11.0" text="Módulos">
+                        <font>
+                            <Font name="System Bold" size="16.0" />
+                        </font>
+                    </Label>
+                    <Button fx:id="modulos_agregarBtn" layoutX="733.0" layoutY="9.0" mnemonicParsing="false" onAction="#displayFormCreateModulo" prefHeight="30.0" prefWidth="79.0" styleClass="crearBtn" stylesheets="@../css/modulo.css" text="Agregar" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="14.0" />
+                        </font>
+                    </Button>
+                    <Button fx:id="modulos_editarBtn" layoutX="654.0" layoutY="9.0" mnemonicParsing="false" onAction="#displayFormUpdateModulo" prefHeight="30.0" prefWidth="68.0" styleClass="crearBtn" stylesheets="@../css/modulo.css" text="Editar" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="14.0" />
+                        </font>
+                    </Button>
+                    <Button fx:id="modulos_eliminarBtn" layoutX="563.0" layoutY="9.0" mnemonicParsing="false" onAction="#displayDeleteModulo" prefHeight="30.0" prefWidth="79.0" styleClass="crearBtn" stylesheets="@../css/modulo.css" text="Eliminar" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="14.0" />
+                        </font>
+                    </Button>
+                </children>
+            </AnchorPane>
+        </children>
+    </AnchorPane>
+</AnchorPane>

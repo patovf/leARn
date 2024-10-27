@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.leARn.controller.MenuController">
+    <children>
+        <AnchorPane prefHeight="600.0" prefWidth="1100.0" stylesheets="@../css/dashboard.css">
+            <children>
+                <BorderPane prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <top>
+                        <AnchorPane fx:id="menu_barraSuperior" prefHeight="36.0" prefWidth="1100.0" styleClass="top-form" stylesheets="@../css/dashboard.css" BorderPane.alignment="CENTER">
+                            <children>
+                                <ImageView fx:id="menu_barraLogo" fitHeight="25.0" fitWidth="20.0" layoutX="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/logo_leARn_2.jpeg" />
+                                    </image>
+                                </ImageView>
+                                <Button fx:id="menu_cerrarApp" layoutX="1034.0" layoutY="5.0" mnemonicParsing="false" onAction="#close" prefHeight="25.0" prefWidth="52.0" styleClass="close" stylesheets="@../css/dashboard.css" text="x">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font></Button>
+                                <Button fx:id="menu_minimizarApp" layoutX="997.0" layoutY="5.0" mnemonicParsing="false" onAction="#minimize" prefHeight="25.0" prefWidth="30.0" styleClass="minimize" stylesheets="@../css/dashboard.css" text="-">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font></Button>
+                                <Label fx:id="menu_barraTitulo" layoutX="44.0" layoutY="6.0" text="leARn" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="16.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </AnchorPane>
+                    </top>
+                    <left>
+                        <AnchorPane fx:id="menu_panel" prefHeight="544.0" prefWidth="200.0" styleClass="nav-form" stylesheets="@../css/dashboard.css" BorderPane.alignment="CENTER">
+                            <children>
+                                <ImageView fx:id="menu_logo" fitHeight="150.0" fitWidth="200.0" layoutX="26.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/logo_leARn_2.jpeg" />
+                                    </image>
+                                </ImageView>
+                                <Label fx:id="menu_nombreUsuario" layoutX="93.0" layoutY="236.0" text="X" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="20.0" />
+                                    </font>
+                                </Label>
+                                <Button fx:id="menu_cerrarSesion" layoutX="37.0" layoutY="495.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="125.0" styleClass="logout" stylesheets="@../css/dashboard.css" text="Cerrar sesión" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Button>
+                                <Line fx:id="menu_separador" endX="75.0" layoutX="103.0" layoutY="283.0" startX="-79.0" stroke="#b9b9b9" />
+                                <Button fx:id="menu_inicioBtn" layoutX="37.0" layoutY="306.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="25.0" prefWidth="126.0" text="Inicio" />
+                                <Button fx:id="menu_institucionesBtn" layoutX="37.0" layoutY="340.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="25.0" prefWidth="125.0" text="Instituciones" />
+                                <Button fx:id="menu_cursosBtn" layoutX="37.0" layoutY="375.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="25.0" prefWidth="125.0" text="Cursos" />
+                                <Button fx:id="menu_modulosBtn" layoutX="37.0" layoutY="410.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="25.0" prefWidth="125.0" text="Modulos" />
+                                <Button fx:id="menu_ejerciciosBtn" layoutX="37.0" layoutY="444.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="25.0" prefWidth="125.0" text="Ejercicios" />
+                            </children>
+                        </AnchorPane>
+                    </left>
+                    <center>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                            <children>
+                                <AnchorPane prefHeight="552.0" prefWidth="901.0">
+                                    <children>
+                                        <fx:include fx:id="inicio_panel" source="inicio.fxml" />
+                                        <fx:include fx:id="instituciones_panel" source="instituciones.fxml" />
+                                        <fx:include fx:id="cursos_panel" source="cursos.fxml" />
+                                        <fx:include fx:id="modulos_panel" source="modulos.fxml" />
+                                        <fx:include fx:id="ejercicios_panel" source="ejercicios.fxml" />
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </AnchorPane>
+                    </center>
+                </BorderPane>
+            </children>
+        </AnchorPane>
+    </children>
+</StackPane>
