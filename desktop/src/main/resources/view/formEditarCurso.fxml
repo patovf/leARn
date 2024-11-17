@@ -28,17 +28,19 @@
                                 <Font name="System Bold" size="14.0" />
                             </font>
                         </Button>
+                  <Label layoutX="74.0" layoutY="166.0" text="Código" />
+                  <TextField fx:id="editarCurso_codigo" layoutX="74.0" layoutY="183.0" prefHeight="25.0" prefWidth="183.0" />
+                  <Label layoutX="77.0" layoutY="216.0" text="Descripción" />
+                  <TextField fx:id="editarCurso_descripcion" layoutX="74.0" layoutY="233.0" prefHeight="48.0" prefWidth="412.0" />
+                  <Label layoutX="300.0" layoutY="166.0" text="Es público" />
+                  <ComboBox fx:id="editarCurso_esPublico" layoutX="300.0" layoutY="183.0" prefHeight="25.0" prefWidth="183.0" />
                     </children>
                 </AnchorPane>
             </children>
         </AnchorPane>
       <Label layoutX="88.0" layoutY="126.0" text="Nombre" />
       <TextField fx:id="editarCurso_nombre" layoutX="88.0" layoutY="143.0" prefHeight="25.0" prefWidth="412.0" />
-      <Label layoutX="91.0" layoutY="180.0" text="Descripción" />
-      <TextField fx:id="editarCurso_descripcion" layoutX="88.0" layoutY="197.0" prefHeight="48.0" prefWidth="412.0" />
-      <Label layoutX="88.0" layoutY="256.0" text="Es público" />
       <Label layoutX="88.0" layoutY="74.0" prefHeight="17.0" prefWidth="68.0" text="Institución" />
-      <ComboBox fx:id="editarCurso_esPublico" layoutX="88.0" layoutY="273.0" prefHeight="25.0" prefWidth="183.0" />
       <ComboBox fx:id="editarCurso_institucion" layoutX="88.0" layoutY="91.0" prefHeight="25.0" prefWidth="412.0" />
     </children>
 </AnchorPane>

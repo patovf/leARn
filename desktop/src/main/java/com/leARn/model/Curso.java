@@ -7,11 +7,16 @@ public class Curso {
     private String descripcion;
     private boolean esPublico;
     private Institucion institucion;
+    private int institucionId;
+    private String codigo;
 
-    public Curso(String nombre, String descripcion, boolean esPublico, Institucion institucion) {
+    public Curso(int id, String nombre, String descripcion, boolean esPublico, int institucionId, String codigo, Institucion institucion) {
+        this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.esPublico = esPublico;
+        this.institucionId = institucionId;
+        this.codigo = codigo;
         this.institucion = institucion;
     }
 
@@ -61,5 +66,25 @@ public class Curso {
 
     public String getCursoEsPublico() {
         return esPublico ? "Si" : "No";
+    }
+
+    public int getInstitucionId() {
+        return institucionId;
+    }
+
+    public void setInstitucionId(int institucionId) {
+        this.institucionId = institucionId;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public String toString() {
+        return this.nombre;
     }
 }

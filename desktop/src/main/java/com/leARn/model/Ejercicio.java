@@ -9,12 +9,13 @@ public class Ejercicio {
     private TipoDeEjercicio tipoDeEjercicio;
     private Dificultad dificultad;
 
-    public Ejercicio(String nombre, String descripcion, Modulo modulo, TipoDeEjercicio tipoDeEjercicio, Dificultad dificultad) {
+    public Ejercicio(int id, String nombre, String descripcion, Modulo modulo, String tipoDeEjercicio, String dificultad) {
+        this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.modulo = modulo;
-        this.tipoDeEjercicio = tipoDeEjercicio;
-        this.dificultad = dificultad;
+        this.tipoDeEjercicio = TipoDeEjercicio.valueOf(tipoDeEjercicio);
+        this.dificultad = Dificultad.valueOf(dificultad);
     }
 
     public int getId() {
@@ -71,5 +72,9 @@ public class Ejercicio {
 
     public String getModuloNombre() {
         return modulo != null ? modulo.getNombre() : "";
+    }
+
+    public String toString() {
+        return this.nombre;
     }
 }

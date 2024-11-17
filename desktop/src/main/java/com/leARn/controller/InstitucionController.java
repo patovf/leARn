@@ -18,11 +18,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import main.java.com.leARn.config.Database;
 import main.java.com.leARn.model.Institucion;
 import main.java.com.leARn.model.Modulo;
 import main.java.com.leARn.utils.AlertMessage;
 import main.java.com.leARn.model.Curso;
-
+import main.java.com.leARn.controller.dto.InstitucionDto;
 
 public class InstitucionController implements Initializable {
 
@@ -112,12 +113,45 @@ public class InstitucionController implements Initializable {
 
     private AlertMessage alert = new AlertMessage();
 
+    private ObservableList<String> provincias = FXCollections.observableArrayList("Cordoba", "Mendoza", "Santa Fe");
+    private ObservableList<String> ciudades = FXCollections.observableArrayList("Cordoba", "Mendoza", "Rosario");
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        if (nuevaInstitucion_provincia != null) {
+            nuevaInstitucion_provincia.setItems(provincias);
+            nuevaInstitucion_provincia.getSelectionModel().select(0);
+        }
+
+        if (editarInstitucion_provincia != null) {
+            editarInstitucion_provincia.setItems(provincias);
+            editarInstitucion_provincia.getSelectionModel().select(0);
+        }
+
+        if (nuevaInstitucion_ciudad != null) {
+            nuevaInstitucion_ciudad.setItems(ciudades);
+            nuevaInstitucion_ciudad.getSelectionModel().select(0);
+        }
+
+        if (editarInstitucion_ciudad != null) {
+            editarInstitucion_ciudad.setItems(ciudades);
+            editarInstitucion_ciudad.getSelectionModel().select(0);
+        }
+
+        setData();
+        getInstituciones();
+        displayInstituciones();
+
+    }
+
+
 
     public void switchToInstituciones(boolean value) {
         try {
             System.out.println("ver instituciones");
             instituciones_panel.setVisible(value);
             instituciones_panel.setManaged(value);
+            displayInstituciones();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -126,14 +160,30 @@ public class InstitucionController implements Initializable {
     public ObservableList<Institucion> getInstituciones() {
         ObservableList<Institucion> list = FXCollections.observableArrayList();
 
+        String query = "SELECT * FROM institucion";
+
         Institucion institucion;
 
         try {
-            institucion = new Institucion("Institucion 1", "Cordoba", "Rio Cuarto", "Av. Libertador 1234");
+            connect = Database.connectDB();
+            prepare = connect.prepareStatement(query);
+            result = prepare.executeQuery();
 
-            list.add(institucion);
+            list.clear();
 
-            System.out.println("traigo INSTITUCIONES");
+
+            if (result.next()) {
+                do {
+                    institucion = new Institucion(result.getInt("id"),
+                            result.getString("nombre"),
+                            result.getString("provincia"),
+                            result.getString("ciudad"),
+                            result.getString("direccion"));
+                    list.add(institucion);
+                } while (result.next());
+
+            }
+            System.out.println("traigo inst");
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -184,9 +234,22 @@ public class InstitucionController implements Initializable {
     public void createInstitucion() {
         try {
 
-            alert.successMessage("Institución creada correctamente!");
+            String query = "INSERT INTO institucion (nombre, provincia, ciudad, direccion) VALUES (?, ?, ?, ?)";
 
-//            instituciones_tabla.refresh();
+            connect = Database.connectDB();
+            prepare = connect.prepareStatement(query);
+
+            prepare.setString(1, nuevaInstitucion_nombre.getText());
+            prepare.setString(2, nuevaInstitucion_provincia.getSelectionModel().getSelectedItem());
+            prepare.setString(3, nuevaInstitucion_ciudad.getSelectionModel().getSelectedItem());
+            prepare.setString(4, nuevaInstitucion_direccion.getText());
+
+            prepare.executeUpdate();
+
+            this.getInstituciones();
+            this.displayInstituciones();
+
+            alert.successMessage("Institución creada correctamente!");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -209,6 +272,12 @@ public class InstitucionController implements Initializable {
                     return;
                 } else {
 
+                    InstitucionDto.id = institucion.getId();
+                    InstitucionDto.nombre = institucion.getNombre();
+                    InstitucionDto.provincia = institucion.getProvincia();
+                    InstitucionDto.ciudad = institucion.getCiudad();
+                    InstitucionDto.direccion = institucion.getDireccion();
+
                     Parent root = FXMLLoader.load(getClass().getResource("/main/resources/view/formEditarInstitucion.fxml"));
                     Stage stage = new Stage();
                     stage.setScene(new Scene(root));
@@ -227,6 +296,19 @@ public class InstitucionController implements Initializable {
     public void editInstitucion() {
         try {
             if (alert.confirmMessage("Está seguro de que desea editar esta institución?")) {
+
+                String query = "UPDATE institucion SET nombre = '" + editarInstitucion_nombre.getText() + "', "
+                        + "provincia = '" + editarInstitucion_provincia.getSelectionModel().getSelectedItem() + "', "
+                        + "ciudad = " + editarInstitucion_ciudad.getSelectionModel().getSelectedItem() + ", "
+                        + "direccion = " + editarInstitucion_direccion.getText() + " "
+                        + "WHERE id = " + InstitucionDto.id + "";
+
+                System.out.println(query);
+
+                connect = Database.connectDB();
+                prepare = connect.prepareStatement(query);
+
+                prepare.executeUpdate();
 
                 alert.successMessage("Institución editada correctamente!");
 
@@ -277,9 +359,23 @@ public class InstitucionController implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        displayInstituciones();
+    public void setData() {
+        try {
+            String query = "SELECT * FROM institucion WHERE id = " + InstitucionDto.id + ";";
+
+            connect = Database.connectDB();
+            prepare = connect.prepareStatement(query);
+            result = prepare.executeQuery();
+
+            if (result.next()) {
+                editarInstitucion_nombre.setText(result.getString("nombre"));
+                editarInstitucion_provincia.getSelectionModel().select(result.getString("provincia"));
+                editarInstitucion_ciudad.getSelectionModel().select(result.getString("ciudad"));
+                editarInstitucion_direccion.setText(result.getString("direccion"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
 

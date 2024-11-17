@@ -5,8 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,8 +18,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import main.java.com.leARn.config.Database;
-import main.java.com.leARn.controller.dto.CursoDto;
-import main.java.com.leARn.controller.dto.InstitucionDto;
 import main.java.com.leARn.model.Ejercicio;
 import main.java.com.leARn.model.Institucion;
 import main.java.com.leARn.model.Modulo;
@@ -31,10 +27,10 @@ import main.java.com.leARn.utils.AlertMessage;
 import main.java.com.leARn.model.Curso;
 
 
-public class CursoController implements Initializable {
+public class CursoInscriptoController implements Initializable {
 
     @FXML
-    private AnchorPane cursos_panel;
+    private AnchorPane cursosInscripto_panel;
 
     @FXML
     private AnchorPane cursos_filtros;
@@ -87,9 +83,6 @@ public class CursoController implements Initializable {
     @FXML
     private ComboBox<Institucion> nuevoCurso_institucion;
 
-    @FXML
-    private TextField nuevoCurso_codigo;
-
     // --- EDITAR CURSO ---
 
     @FXML
@@ -110,9 +103,6 @@ public class CursoController implements Initializable {
     @FXML
     private ComboBox<Institucion> editarCurso_institucion;
 
-    @FXML
-    private TextField editarCurso_codigo;
-
     // --- ELIMINAR CURSO ---
 
     @FXML
@@ -128,42 +118,12 @@ public class CursoController implements Initializable {
 
     private AlertMessage alert = new AlertMessage();
 
-    List<Institucion> instituciones = getInstituciones();
-    ObservableList<Institucion> institucionObservableList = FXCollections.observableArrayList(instituciones);
-    private ObservableList<String> esPublico = FXCollections.observableArrayList("Si", "No");
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-        if (nuevoCurso_institucion != null) {
-            nuevoCurso_institucion.setItems(institucionObservableList);
-            nuevoCurso_institucion.getSelectionModel().select(0);
-        }
-
-        if (editarCurso_institucion != null) {
-            editarCurso_institucion.setItems(institucionObservableList);
-            editarCurso_institucion.getSelectionModel().select(0);
-        }
-
-        if (nuevoCurso_esPublico != null) {
-            nuevoCurso_esPublico.setItems(esPublico);
-            nuevoCurso_esPublico.getSelectionModel().select(0);
-        }
-
-        if (editarCurso_esPublico != null) {
-            editarCurso_esPublico.setItems(esPublico);
-            editarCurso_esPublico.getSelectionModel().select(0);
-        }
-
-        setData();
-        displayCursos();
-    }
 
     public void switchToCursos(boolean value) {
         try {
-            System.out.println("ver Cursos");
-            cursos_panel.setVisible(value);
-            cursos_panel.setManaged(value);
+
+            cursosInscripto_panel.setVisible(value);
+            cursosInscripto_panel.setManaged(value);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -172,7 +132,7 @@ public class CursoController implements Initializable {
     public ObservableList<Curso> getCursos() {
         ObservableList<Curso> list = FXCollections.observableArrayList();
 
-        String query = "SELECT * FROM curso";
+        String query = "SELECT * FROM curso_usuario";
 
         Institucion institucion = null;
         Curso curso;
@@ -186,35 +146,41 @@ public class CursoController implements Initializable {
             list.clear();
 
             if (result.next()) {
-                int institucionId = result.getInt("institucion_id");
+                String query2 = "SELECT * FROM curso WHERE id = ?";
 
-                String query2 = "SELECT * FROM institucion WHERE id = ?";
+                PreparedStatement prepare2 = connect.prepareStatement(query2);
+                prepare2.setInt(1, result.getInt("curso_id"));
+                ResultSet result2 = prepare2.executeQuery();
+                if (result2.next()) {
 
-                    PreparedStatement prepare2 = connect.prepareStatement(query2);
-                    prepare2.setInt(1, institucionId);
-                    ResultSet result2 = prepare2.executeQuery();
+                    int institucionId = result2.getInt("institucion_id");
 
-                    if (result2.next()) {
-                        institucion = new Institucion(result2.getInt("id"),
-                                result2.getString("nombre"),
-                                result2.getString("provincia"),
-                                result2.getString("ciudad"),
-                                result2.getString("direccion"));
+                    String query3 = "SELECT * FROM institucion WHERE id = ?";
+
+                    PreparedStatement prepare3 = connect.prepareStatement(query3);
+                    prepare3.setInt(1, institucionId);
+                    ResultSet result3 = prepare3.executeQuery();
+
+                    if (result3.next()) {
+                        institucion = new Institucion(result3.getInt("id"),
+                                result3.getString("nombre"),
+                                result3.getString("provincia"),
+                                result3.getString("ciudad"),
+                                result3.getString("direccion"));
                     }
 
-                do {
-                    curso = new Curso(result.getInt("id"),
-                            result.getString("nombre"),
-                            result.getString("descripcion"),
-                            result.getBoolean("esPublico"),
-                            result.getInt("institucion_id"),
-                            result.getString("codigo"),
-                            institucion);
-                    list.add(curso);
-                } while (result.next());
+                    do {
+                        curso = new Curso(result2.getInt("id"),
+                                result2.getString("nombre"),
+                                result2.getString("descripcion"),
+                                result2.getBoolean("esPublico"),
+                                result2.getInt("institucion_id"),
+                                result2.getString("codigo"),
+                                institucion);
+                        list.add(curso);
+                    } while (result.next());
+                }
             }
-
-            System.out.println("traigo Cursos");
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -264,28 +230,10 @@ public class CursoController implements Initializable {
 
     public void createCurso() {
         try {
-            Institucion institucion;
-            String query = "INSERT INTO curso (nombre, descripcion, institucion_id, esPublico, codigo) VALUES (?, ?, ?, ?, ?)";
-
-            connect = Database.connectDB();
-            prepare = connect.prepareStatement(query);
-
-            prepare.setString(1, nuevoCurso_nombre.getText());
-            prepare.setString(2, nuevoCurso_descripcion.getText());
-            prepare.setInt(3, nuevoCurso_institucion.getSelectionModel().getSelectedItem().getId());
-
-            String esPublicoValue = nuevoCurso_esPublico.getSelectionModel().getSelectedItem();
-            boolean esPublico = Objects.equals(esPublicoValue, "Si");
-
-            prepare.setBoolean(4, esPublico);
-            prepare.setString(5, nuevoCurso_codigo.getText());
-
-            prepare.executeUpdate();
-
-            this.getCursos();
-            this.displayCursos();
 
             alert.successMessage("Curso creado correctamente!");
+
+//            cursos_tabla.refresh();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -308,14 +256,6 @@ public class CursoController implements Initializable {
                     return;
                 } else {
 
-                    CursoDto.id = curso.getId();
-                    CursoDto.nombre = curso.getNombre();
-                    CursoDto.descripcion = curso.getDescripcion();
-                    CursoDto.codigo = curso.getCodigo();
-                    CursoDto.esPublico = curso.isEsPublico();
-                    CursoDto.institucionId = curso.getInstitucionId();
-
-
                     Parent root = FXMLLoader.load(getClass().getResource("/main/resources/view/formEditarCurso.fxml"));
                     Stage stage = new Stage();
                     stage.setScene(new Scene(root));
@@ -334,19 +274,6 @@ public class CursoController implements Initializable {
     public void editCurso() {
         try {
             if (alert.confirmMessage("Está seguro de que desea editar este Curso?")) {
-
-                String query = "UPDATE curso SET nombre = '" + editarCurso_nombre.getText() + "', "
-                        + "descripcion = '" + editarCurso_descripcion.getText() + "', "
-                        + "esPublico = " + editarCurso_esPublico.getSelectionModel().getSelectedItem() + ", "
-                        + "institucion_id = " + editarCurso_institucion.getSelectionModel().getSelectedItem().getId() + " "
-                        + "WHERE id = " + CursoDto.id + "";
-
-                System.out.println(query);
-
-                connect = Database.connectDB();
-                prepare = connect.prepareStatement(query);
-
-                prepare.executeUpdate();
 
                 alert.successMessage("Curso editado correctamente!");
 
@@ -397,58 +324,9 @@ public class CursoController implements Initializable {
         }
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
 
-    public ObservableList<Institucion> getInstituciones() {
-        ObservableList<Institucion> list = FXCollections.observableArrayList();
-
-        String query = "SELECT * FROM institucion";
-
-        Institucion institucion;
-
-        try {
-            connect = Database.connectDB();
-            prepare = connect.prepareStatement(query);
-            result = prepare.executeQuery();
-
-            list.clear();
-
-
-            if (result.next()) {
-                do {
-                    institucion = new Institucion(result.getInt("id"),
-                            result.getString("nombre"),
-                            result.getString("provincia"),
-                            result.getString("ciudad"),
-                            result.getString("direccion"));
-                    list.add(institucion);
-                } while (result.next());
-
-            }
-            System.out.println("traigo inst");
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        return list;
-    }
-
-    public void setData() {
-        try {
-            String query = "SELECT * FROM curso WHERE id = " + CursoDto.id + ";";
-
-            connect = Database.connectDB();
-            prepare = connect.prepareStatement(query);
-            result = prepare.executeQuery();
-
-            if (result.next()) {
-                editarCurso_nombre.setText(result.getString("nombre"));
-                editarCurso_descripcion.setText(result.getString("descripcion"));
-                editarCurso_esPublico.getSelectionModel().select(String.valueOf(result.getBoolean("esPublico")));
-                //editarCurso_institucion.getSelectionModel().select(getInstitucionById(result.getInt("institucion_id")));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        displayCursos();
     }
 }

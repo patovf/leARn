@@ -8,7 +8,8 @@ public class Institucion {
     private String ciudad;
     private String direccion;
 
-    public Institucion(String nombre, String provincia, String ciudad, String direccion) {
+    public Institucion(int id, String nombre, String provincia, String ciudad, String direccion) {
+        this.id = id;
         this.nombre = nombre;
         this.provincia = provincia;
         this.ciudad = ciudad;
@@ -53,5 +54,9 @@ public class Institucion {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public String toString() {
+        return this.nombre;
     }
 }

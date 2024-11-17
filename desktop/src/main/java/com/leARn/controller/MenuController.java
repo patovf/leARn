@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
+import main.java.com.leARn.model.CursoUsuario;
 
 public class MenuController implements Initializable {
 
@@ -39,6 +40,11 @@ public class MenuController implements Initializable {
     @FXML
     private AnchorPane ejercicios_panel;
 
+    @FXML
+    private AnchorPane cursosUsuario_panel;
+
+    @FXML
+    private AnchorPane cursosInscripto_panel;
     // TERMINAN SECCIONES
 
     @FXML
@@ -88,6 +94,12 @@ public class MenuController implements Initializable {
 
     @FXML
     private Button menu_ejerciciosBtn;
+
+    @FXML
+    private Button menu_cursosUsuarioBtn;
+
+    @FXML
+    private Button menu_cursosInscriptoBtn;
 
     public void close() {
         System.exit(0);
@@ -160,6 +172,29 @@ public class MenuController implements Initializable {
         }
         EjercicioController ejercicioController = ejerciciosLoader.getController();
 
+        // PANEL CURSOS ESTUDIANTE
+
+        FXMLLoader cursosEstudianteLoader = new FXMLLoader();
+        cursosEstudianteLoader.setLocation(getClass().getResource("/main/resources/view/cursosUsuario.fxml"));
+        try {
+            Parent cursosEstudianteRoot = cursosEstudianteLoader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        CursoUsuarioController cursoEstudianteController = cursosEstudianteLoader.getController();
+
+        // PANEL CURSOS ESTUDIANTE
+
+        FXMLLoader cursosInscriptoLoader = new FXMLLoader();
+        cursosInscriptoLoader.setLocation(getClass().getResource("/main/resources/view/cursosInscripto.fxml"));
+        try {
+            Parent cursosInscriptoRoot = cursosInscriptoLoader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        CursoInscriptoController cursoInscriptoController = cursosInscriptoLoader.getController();
+
+
         // MUESTRA DE PANELES
 
         if (event.getSource() == menu_inicioBtn) {
@@ -168,30 +203,56 @@ public class MenuController implements Initializable {
             cursos_panel.setVisible(false);
             modulos_panel.setVisible(false);
             ejercicios_panel.setVisible(false);
+            cursosUsuario_panel.setVisible(false);
+            cursosInscripto_panel.setVisible(false);
         } else if (event.getSource() == menu_institucionesBtn) {
             inicio_panel.setVisible(false);
             instituciones_panel.setVisible(true);
             cursos_panel.setVisible(false);
             modulos_panel.setVisible(false);
             ejercicios_panel.setVisible(false);
+            cursosUsuario_panel.setVisible(false);
+            cursosInscripto_panel.setVisible(false);
         } else if (event.getSource() == menu_cursosBtn) {
             inicio_panel.setVisible(false);
             instituciones_panel.setVisible(false);
             cursos_panel.setVisible(true);
             modulos_panel.setVisible(false);
             ejercicios_panel.setVisible(false);
+            cursosUsuario_panel.setVisible(false);
+            cursosInscripto_panel.setVisible(false);
         } else if (event.getSource() == menu_modulosBtn) {
             inicio_panel.setVisible(false);
             instituciones_panel.setVisible(false);
             cursos_panel.setVisible(false);
             modulos_panel.setVisible(true);
             ejercicios_panel.setVisible(false);
+            cursosUsuario_panel.setVisible(false);
+            cursosInscripto_panel.setVisible(false);
         } else if (event.getSource() == menu_ejerciciosBtn) {
             inicio_panel.setVisible(false);
             instituciones_panel.setVisible(false);
             cursos_panel.setVisible(false);
             modulos_panel.setVisible(false);
             ejercicios_panel.setVisible(true);
+            cursosUsuario_panel.setVisible(false);
+            cursosInscripto_panel.setVisible(false);
+        } else if (event.getSource() == menu_cursosUsuarioBtn) {
+            inicio_panel.setVisible(false);
+            instituciones_panel.setVisible(false);
+            cursos_panel.setVisible(false);
+            modulos_panel.setVisible(false);
+            ejercicios_panel.setVisible(false);
+            cursosUsuario_panel.setVisible(true);
+            cursosInscripto_panel.setVisible(false);
+        } else if (event.getSource() == menu_cursosInscriptoBtn) {
+            inicio_panel.setVisible(false);
+            instituciones_panel.setVisible(false);
+            cursos_panel.setVisible(false);
+            modulos_panel.setVisible(false);
+            ejercicios_panel.setVisible(false);
+            cursosUsuario_panel.setVisible(false);
+            cursosInscripto_panel.setVisible(true);
         }
     }
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" fx:id="cursos_panel" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" stylesheets="@../css/curso.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.leARn.controller.CursoUsuarioController">
+    <AnchorPane fx:id="cursos_panel_sec" prefHeight="564.0" prefWidth="900.0" stylesheets="@../css/curso.css">
+        <children>
+            <AnchorPane fx:id="cursos_tablaVista" layoutX="33.0" layoutY="19.0" prefHeight="526.0" prefWidth="834.0" styleClass="card" stylesheets="@../css/curso.css" AnchorPane.rightAnchor="33.0">
+                <children>
+                    <Button fx:id="cursos_agregarBtn" layoutX="733.0" layoutY="9.0" mnemonicParsing="false" onAction="#displayFormCreateCurso" prefHeight="30.0" prefWidth="79.0" styleClass="crearBtn" stylesheets="@../css/curso.css" text="Agregar" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="14.0" />
+                        </font>
+                    </Button>
+                    <Button fx:id="cursos_editarBtn" layoutX="654.0" layoutY="9.0" mnemonicParsing="false" onAction="#displayFormUpdateCurso" prefHeight="30.0" prefWidth="68.0" styleClass="crearBtn" stylesheets="@../css/curso.css" text="Editar" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="14.0" />
+                        </font>
+                    </Button>
+                    <Button fx:id="cursos_eliminarBtn" layoutX="563.0" layoutY="9.0" mnemonicParsing="false" onAction="#displayDeleteCurso" prefHeight="30.0" prefWidth="79.0" styleClass="crearBtn" stylesheets="@../css/curso.css" text="Eliminar" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="14.0" />
+                        </font>
+                    </Button>
+               <Button layoutX="22.0" layoutY="66.0" mnemonicParsing="false" prefHeight="132.0" prefWidth="791.0" text="Módulo 1" />
+               <Button layoutX="22.0" layoutY="211.0" mnemonicParsing="false" prefHeight="132.0" prefWidth="791.0" text="Módulo 2" />
+               <Button layoutX="22.0" layoutY="356.0" mnemonicParsing="false" prefHeight="132.0" prefWidth="791.0" text="Módulo 3" />
+               <Text layoutX="22.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Módulos del curso">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+               </Text>
+                </children>
+            </AnchorPane>
+        </children>
+    </AnchorPane>
+</AnchorPane>

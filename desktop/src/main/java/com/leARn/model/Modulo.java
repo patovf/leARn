@@ -7,7 +7,8 @@ public class Modulo {
     private String descripcion;
     private Curso curso;
 
-    public Modulo(String nombre, String descripcion, Curso curso) {
+    public Modulo(int id, String nombre, String descripcion, Curso curso) {
+        this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.curso = curso;
@@ -47,5 +48,9 @@ public class Modulo {
 
     public String getCursoNombre() {
         return curso != null ? curso.getNombre() : "";
+    }
+
+    public String toString() {
+        return this.nombre;
     }
 }

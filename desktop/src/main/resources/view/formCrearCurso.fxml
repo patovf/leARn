@@ -20,9 +20,9 @@
                         </Label>
                         <Label layoutX="78.0" layoutY="116.0" text="Nombre" />
                         <TextField fx:id="nuevoCurso_nombre" layoutX="78.0" layoutY="133.0" prefHeight="25.0" prefWidth="412.0" />
-                        <Label layoutX="81.0" layoutY="170.0" text="Descripción" />
-                        <TextField fx:id="nuevoCurso_descripcion" layoutX="78.0" layoutY="187.0" prefHeight="48.0" prefWidth="412.0" />
-                        <Label layoutX="78.0" layoutY="246.0" text="Es público" />
+                        <Label layoutX="81.0" layoutY="218.0" text="Descripción" />
+                        <TextField fx:id="nuevoCurso_descripcion" layoutX="78.0" layoutY="235.0" prefHeight="48.0" prefWidth="412.0" />
+                        <Label layoutX="78.0" layoutY="166.0" text="Código" />
                         <Button fx:id="nuevoCurso_crearBtn" layoutX="483.0" layoutY="314.0" mnemonicParsing="false" onAction="#createCurso" styleClass="crearBtn" stylesheets="@../css/curso.css" text="Crear" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="14.0" />
@@ -34,8 +34,10 @@
                             </font>
                         </Button>
                         <Label layoutX="78.0" layoutY="64.0" prefHeight="17.0" prefWidth="68.0" text="Institución" />
-                        <ComboBox fx:id="nuevoCurso_esPublico" layoutX="78.0" layoutY="263.0" prefHeight="25.0" prefWidth="183.0" />
                   <ComboBox fx:id="nuevoCurso_institucion" layoutX="78.0" layoutY="81.0" prefHeight="25.0" prefWidth="412.0" />
+                  <Label layoutX="307.0" layoutY="166.0" text="Es público" />
+                  <ComboBox fx:id="nuevoCurso_esPublico" layoutX="307.0" layoutY="183.0" prefHeight="25.0" prefWidth="183.0" />
+                  <TextField fx:id="nuevoCurso_codigo" layoutX="78.0" layoutY="183.0" prefHeight="25.0" prefWidth="183.0" />
                     </children>
                 </AnchorPane>
             </children>
