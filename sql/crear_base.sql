@@ -21,10 +21,11 @@ USE `learn` ;
 -- Table `learn`.`institucion`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `learn`.`institucion` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `provincia` VARCHAR(255) NOT NULL,
   `ciudad` VARCHAR(255) NOT NULL,
   `direccion` VARCHAR(255) NOT NULL,
+    `nombre` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -33,7 +34,7 @@ ENGINE = InnoDB;
 -- Table `learn`.`usuario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `learn`.`usuario` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(16) NOT NULL,
   `apellido` VARCHAR(255) NOT NULL,
   `email` VARCHAR(32) NOT NULL,
@@ -51,11 +52,12 @@ ENGINE = InnoDB;
 -- Table `learn`.`curso`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `learn`.`curso` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(255) NOT NULL,
   `descripcion` VARCHAR(255) NOT NULL,
   `esPublico` TINYINT NOT NULL,
   `institucion_id` INT NOT NULL,
+    `codigo` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`, `institucion_id`),
   CONSTRAINT `fk_curso_institucion`
     FOREIGN KEY (`institucion_id`)
@@ -66,7 +68,7 @@ ENGINE = InnoDB;
 -- Table `learn`.`modulo`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `learn`.`modulo` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(255) NOT NULL,
   `descripcion` VARCHAR(255) NOT NULL,
   `curso_id` INT NOT NULL,
@@ -81,7 +83,7 @@ ENGINE = InnoDB;
 -- Table `learn`.`ejercicio`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `learn`.`ejercicio` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(255) NOT NULL,
   `descripcion` VARCHAR(255) NOT NULL,
   `modulo_id` INT NOT NULL,
@@ -98,7 +100,7 @@ ENGINE = InnoDB;
 -- Table `learn`.`respuesta`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `learn`.`respuesta` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `descripcion` VARCHAR(255) NOT NULL,
   `es_correcta` TINYINT NOT NULL,
   `ejercicio_id` INT NOT NULL,
@@ -114,7 +116,7 @@ ENGINE = InnoDB;
 -- Table `learn`.`respuesta_usuario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `learn`.`respuesta_usuario` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `respuesta_id` INT NOT NULL,
   `usuario_id` INT NOT NULL,
   PRIMARY KEY (`id`, `usuario_id`, `respuesta_id`),
@@ -131,7 +133,7 @@ ENGINE = InnoDB;
 -- Table `learn`.`curso_usuario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `learn`.`curso_usuario` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `curso_id` INT NOT NULL,
   `usuario_id` INT NOT NULL,
   PRIMARY KEY (`id`, `usuario_id`, `curso_id`),

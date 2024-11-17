@@ -1,7 +1,8 @@
 -- Insertar instituciones
-INSERT INTO learn.institucion (id, provincia, ciudad, direccion) VALUES
-(1, 'Buenos Aires', 'La Plata', 'Independencia 123'),
-(2, 'Córdoba', 'Córdoba', 'Av. Libertador 456');
+INSERT INTO learn.institucion (id, provincia, ciudad, direccion, nombre) VALUES 
+(1,'Córdoba','Ciudad de Córdoba','Av. Libertador 433','Institucion José de San Martín'),
+(2,'Córdoba','Córdoba','Av. Libertador 456','Institución Juan Bautista Alberdi'),
+(10,'Cordoba','Cordoba','direccion 123','test institucion 1');
 
 -- Insertar usuarios
 INSERT INTO learn.usuario (id, nombre, apellido, email, rol, institucion_id) VALUES
@@ -10,9 +11,9 @@ INSERT INTO learn.usuario (id, nombre, apellido, email, rol, institucion_id) VAL
 (3, 'Carlos', 'Sánchez', 'carlos.sanchez@example.com', 'estudiante', 2);
 
 -- Insertar cursos
-INSERT INTO learn.curso (id, nombre, descripcion, esPublico, institucion_id) VALUES
-(1, 'Cálculo', 'Curso de Cálculo', 1, 1),
-(2, 'Bases de datos', 'Curso de SQL', 1, 2);
+INSERT INTO learn.curso (id, nombre, descripcion, esPublico, institucion_id, codigo)  VALUES 
+(1,'Cálculo','Curso de Cálculo',1,1,'ABC001'),
+(2,'Bases de datos','Curso de SQL',1,2,'ABC002');
 
 -- Insertar módulos
 INSERT INTO learn.modulo (id, nombre, descripcion, curso_id) VALUES
@@ -22,7 +23,7 @@ INSERT INTO learn.modulo (id, nombre, descripcion, curso_id) VALUES
 -- Insertar ejercicios
 INSERT INTO learn.ejercicio (id, nombre, descripcion, modulo_id, tipo_de_ejercicio, dificultad) VALUES
 (1, 'Valor de y cuando x cambie', '¿Qué valor toma y en la función y = x * 2 si x = 4?', 1, 'Selección única', 'fácil'),
-(2, 'Consulta de valor en tabla', 'Si tuviéramos una tabla de empleados y quisiéramos conocer quiénes tienen sueldos mayores a 1000 ¿Qué sentencia SQL deberíamos usar?', 3, 'Selección única', 'difícil');
+(2, 'Consulta de valor en tabla', 'Si tuviéramos una tabla de empleados y quisiéramos conocer quiénes tienen sueldos mayores a 1000 ¿Qué sentencia SQL deberíamos usar?', 2, 'Selección única', 'difícil');
 
 -- Insertar respuestas
 -- Insertar respuestas para el ejercicio 1
